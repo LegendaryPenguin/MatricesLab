@@ -76,3 +76,77 @@ void multiplyMatrices(const vector<vector<int>>& A, const vector<vector<int>>& B
     }
 }
 
+// This function calculates and prints the sum of diagonal elements
+void sumDiagonals(const vector<vector<int>>& matrix, int N) {
+    int mainDiagonal = 0, secondaryDiagonal = 0;
+    for (int i = 0; i < N; ++i) {
+        mainDiagonal += matrix[i][i];
+        secondaryDiagonal += matrix[i][N - i - 1];
+    }
+    cout << "Main diagonal sum: " << mainDiagonal << endl;
+    cout << "Secondary diagonal sum: " << secondaryDiagonal << endl;
+}
+
+// This function swaps two rows in a matrix and prints the result
+void swapRows(vector<vector<int>>& matrix, int row1, int row2, int N) {
+    if (row1 >= 0 && row1 < N && row2 >= 0 && row2 < N) {
+        swap(matrix[row1], matrix[row2]);
+    }
+}
+
+// This function swaps two columns in a matrix and prints the result
+void swapColumns(vector<vector<int>>& matrix, int col1, int col2, int N) {
+    if (col1 >= 0 && col1 < N && col2 >= 0 && col2 < N) {
+        for (int i = 0; i < N; ++i) {
+            swap(matrix[i][col1], matrix[i][col2]);
+        }
+    }
+}
+
+// This function updates a specific element in the matrix and prints the result
+void updateElement(vector<vector<int>>& matrix, int row, int col, int newValue, int N) {
+    if (row >= 0 && row < N && col >= 0 && col < N) {
+        matrix[row][col] = newValue;
+    }
+}
+
+int main() {
+    vector<vector<int>> matrixA, matrixB, result;
+    int N;
+    
+    string filename;
+    cout << "Enter the filename: ";
+    cin >> filename;
+    
+    readMatrixFromFile(filename, matrixA, matrixB, N);
+    
+    cout << "Matrix A:" << endl;
+    printMatrix(matrixA);
+    
+    cout << "Matrix B:" << endl;
+    printMatrix(matrixB);
+    
+    addMatrices(matrixA, matrixB, result, N);
+    cout << "Matrix Addition Result:" << endl;
+    printMatrix(result);
+    
+    multiplyMatrices(matrixA, matrixB, result, N);
+    cout << "Matrix Multiplication Result:" << endl;
+    printMatrix(result);
+    
+    sumDiagonals(matrixA, N);
+    
+    swapRows(matrixA, 0, 1, N);
+    cout << "Matrix A after swapping row 0 and row 1:" << endl;
+    printMatrix(matrixA);
+    
+    swapColumns(matrixA, 0, 1, N);
+    cout << "Matrix A after swapping column 0 and column 1:" << endl;
+    printMatrix(matrixA);
+    
+    updateElement(matrixA, 0, 0, 99, N);
+    cout << "Matrix A after updating element (0,0) to 99:" << endl;
+    printMatrix(matrixA);
+    
+    return 0;
+}
