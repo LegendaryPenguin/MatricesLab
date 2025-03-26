@@ -71,7 +71,9 @@ void multiplyMatrices(const vector<vector<int>>& A, const vector<vector<int>>& B
         for (int j = 0; j < N; ++j) {
             for (int k = 0; k < N; ++k) {
                 result[i][j] += A[i][k] * B[k][j];
+                // cout << A[i][k] * B[k][j] <<endl;
             }
+            // exit(0);
         }
     }
 }
@@ -110,6 +112,14 @@ void updateElement(vector<vector<int>>& matrix, int row, int col, int newValue, 
     }
 }
 
+void clean_results(vector<vector<int>>& matrix) {
+    for (int i = 0; i < matrix.size(); ++i) {
+        for (int j = 0; j < matrix[0].size(); ++j) {
+            matrix[i][j]=0;
+        }
+    }
+}
+
 int main() {
     vector<vector<int>> matrixA, matrixB, result;
     int N;
@@ -129,21 +139,26 @@ int main() {
     addMatrices(matrixA, matrixB, result, N);
     cout << "Matrix Addition Result:" << endl;
     printMatrix(result);
+    clean_results(result);
     
     multiplyMatrices(matrixA, matrixB, result, N);
     cout << "Matrix Multiplication Result:" << endl;
     printMatrix(result);
-    
+    clean_results(result);
+
     sumDiagonals(matrixA, N);
+    clean_results(result);
     
     swapRows(matrixA, 0, 1, N);
     cout << "Matrix A after swapping row 0 and row 1:" << endl;
     printMatrix(matrixA);
-    
+    clean_results(result);
+
     swapColumns(matrixA, 0, 1, N);
     cout << "Matrix A after swapping column 0 and column 1:" << endl;
     printMatrix(matrixA);
-    
+    clean_results(result);
+
     updateElement(matrixA, 0, 0, 99, N);
     cout << "Matrix A after updating element (0,0) to 99:" << endl;
     printMatrix(matrixA);
